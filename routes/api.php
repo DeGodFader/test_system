@@ -33,7 +33,6 @@ Route::middleware(['role:ADMIN'])->group(function () {
     Route::post('/thesis/create', [ThesisController::class,'create']);
     Route::get('/thesis/get', [ThesisController::class,'index']);
     Route::get('/thesis/{id}/get', [ThesisController::class,'show']);
-    Route::put('/thesis/{id}/edit', [ThesisController::class,'edit']);
     Route::delete('/thesis/{id}/delete', [ThesisController::class,'destroy']);
 });
 
@@ -51,4 +50,9 @@ Route::middleware(['role:LIBRARIAN'])->group(function () {
     Route::get('/thesis/get', [ThesisController::class,'index']);
     Route::get('/thesis/{id}/get', [ThesisController::class,'show']);
     Route::put('/thesis/{id}/edit', [ThesisController::class,'edit']);
+});
+
+Route::middleware(['role: USER'])->group(function () {
+    Route::get('/thesis/get', [ThesisController::class,'index']);
+    Route::get('/thesis/{id}/get', [ThesisController::class,'show']);
 });
