@@ -11,14 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('institutions', function (Blueprint $table) {
+        Schema::create('staff', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('address');
-            $table->string('telephone');
             $table->string('email')->unique();
-            $table->string('admin_id')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->enum('role',["ADMIN", "LIBRARIAN", "HOD"]);
+            $table->rememberToken();
             $table->timestamps();
+            $table->foreignId('institution_id')->constrained('institutions')->cascadeOnDelete();
+            $table->jsonb('sessions')->nullable();
         });
     }
 
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('institutions');
+        Schema::dropIfExists('staff');
     }
 };

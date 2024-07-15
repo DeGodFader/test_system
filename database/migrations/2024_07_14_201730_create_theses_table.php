@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('title');
             $table->string('description');
+            $table->foreignId("author")->constrained('staff')->cascadeOnDelete();
         });
     }
 
