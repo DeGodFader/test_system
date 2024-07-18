@@ -16,12 +16,16 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append([
-            CheckKey::class,
             StartSession::class
         ]);
         $middleware->alias([
             'role' => CheckRoles::class,
         ]);
+        $middleware->api(
+            [
+                CheckKey::class,
+            ]
+        );
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
